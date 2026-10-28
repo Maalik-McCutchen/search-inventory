@@ -23,20 +23,28 @@ public class SearchInventory {
             BufferedReader reader = new BufferedReader(new FileReader("inventory.csv"));
             String line = reader.readLine();
             while(line != null) {
+                String[] tokens = line.split("\\|");
+                int iD = Integer.parseInt(tokens[0]);
+                String name = tokens[1];
+                double price = Double.parseDouble(tokens[2]);
+
+
+                Product product = new Product(iD, name, price);
+
+                inventory.add(product);
+
+                line = reader.readLine();
+
 
             }
+            reader.close();
 
         } catch (Exception e) {
             System.err.println("Something went wrong.");
         }
 
-        inventory.add(new Product(1, "Phone", 499.99));
-        inventory.add(new Product(2, "TV", 199.99));
-        inventory.add(new Product(3, "Bed", 49.99));
-        inventory.add(new Product(4, "book", 19.99));
-        inventory.add(new Product(5, "Box", 5.99));
-
 
         return inventory;
     }
+
 }
